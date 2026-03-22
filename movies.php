@@ -1,7 +1,7 @@
 <?php
 require_once 'includes/data.php';
 $movies = getMovies($conn);
-$pageTitle = 'All Recommended Movies';
+$pageTitle = 'All Bolly Movies';
 $heroImage = $movies[0]['banner_url'] ?? null;
 include 'includes/header.php';
 ?>
@@ -10,7 +10,7 @@ include 'includes/header.php';
         <div>
             <p class="eyebrow">Movie Library</p>
             <h2>Explore Every Category</h2>
-            <p class="section-copy">All cards react to scrolling with shifting color palettes while preserving the dark, blue, and purple movie experience.</p>
+            <p class="section-copy">Browse movies loaded from MySQL and open the correct detail or teaser page for each title.</p>
         </div>
     </div>
     <div class="movie-grid">

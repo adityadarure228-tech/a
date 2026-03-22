@@ -84,12 +84,12 @@ if (mysqli_num_rows($adminQuery) === 0) {
 }
 
 $categorySeeds = [
-    ['horror', 'Horror', '#9b1c31'],
-    ['thriller', 'Thriller', '#00b4d8'],
+    ['action', 'Action', '#f8961e'],
     ['romantic', 'Romantic', '#ff70a6'],
-    ['sci-fi', 'Sci-Fi', '#7b61ff'],
-    ['fantasy', 'Fantasy', '#43aa8b'],
-    ['action', 'Action', '#f8961e']
+    ['thriller', 'Thriller', '#00b4d8'],
+    ['drama', 'Drama', '#7b61ff'],
+    ['comedy', 'Comedy', '#43aa8b'],
+    ['classic', 'Classic', '#9b1c31']
 ];
 
 foreach ($categorySeeds as $seed) {
@@ -107,23 +107,20 @@ foreach ($categorySeeds as $seed) {
     mysqli_stmt_close($check);
 }
 
-$movieCountResult = mysqli_query($conn, 'SELECT COUNT(*) AS total FROM movies');
-$movieCount = (int) mysqli_fetch_assoc($movieCountResult)['total'];
-
-if ($movieCount === 0) {
-    $movies = [
-        ['Neon Eclipse', 'sci-fi', 2025, 8.9, '2h 08m', 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/5PSNL1qE6VY', 'A renegade astronaut races through a collapsing wormhole to rewrite the fate of humanity with an AI companion who knows too much.', 1],
-        ['Velvet Pulse', 'romantic', 2024, 8.2, '1h 49m', 'https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/8ugaeA-nMTc', 'A music producer and an architect fall in love while rebuilding a forgotten riverside theater full of memories.', 0],
-        ['Midnight Howl', 'horror', 2023, 7.8, '1h 57m', 'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/smTK_AeAPHs', 'After moving into a forest observatory, a family uncovers a ritual that awakens every full moon.', 0],
-        ['Shadow Protocol', 'thriller', 2025, 8.5, '2h 01m', 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/gCcx85zbxz4', 'A forensic analyst decodes hidden messages in blockbuster trailers and stumbles onto a conspiracy targeting world leaders.', 1],
-        ['Skyforge Realm', 'fantasy', 2024, 8.1, '2h 14m', 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/2SvwX3ux_-8', 'A swordsmith with forgotten magic must reunite broken kingdoms under a sky filled with floating citadels.', 0],
-        ['Crimson Run', 'action', 2026, 8.4, '1h 54m', 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/JfVOs4VSpmA', 'An elite courier crosses megacities at impossible speeds to stop a black-market weapon auction.', 1],
-        ['Starlit Ruins', 'sci-fi', 2026, 8.0, '2h 05m', 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/4UZrsTqkcW4', 'Explorers discover an ancient alien library buried beneath a desert city and awaken a celestial defense system.', 0],
-        ['Electric Hearts', 'romantic', 2025, 7.9, '1h 52m', 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/C0DPdy98e4c', 'Two coders competing in a futuristic hackathon keep finding secret love notes inside each other’s code.', 0],
-        ['House of Echoes', 'horror', 2025, 7.7, '1h 43m', 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/hA6hldpSTF8', 'A sound designer discovers that every whisper in a cursed mansion predicts a future tragedy.', 0],
-        ['Noir Circuit', 'thriller', 2026, 8.6, '2h 11m', 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1497015289639-54688650d173?auto=format&fit=crop&w=1400&q=80', 'https://www.youtube.com/embed/7TavVZMewpY', 'A cybercrime journalist follows a string of smart-city blackouts to a sentient financial algorithm.', 1]
+function bollyMovieSeeds(): array
+{
+    return [
+        ['Pathaan', 'action', 2023, 7.8, '2h 26m', 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1400&q=80', '', 'An exiled field agent returns for a globe-spanning mission that mixes spectacle, emotion, and high-speed action.', 1],
+        ['Rocky Aur Rani Kii Prem Kahaani', 'romantic', 2023, 7.1, '2h 48m', 'https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=1400&q=80', '', 'A lively romance brings two very different families together in a colorful story about love, identity, and acceptance.', 1],
+        ['Andhadhun', 'thriller', 2018, 8.2, '2h 19m', 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1497015289639-54688650d173?auto=format&fit=crop&w=1400&q=80', '', 'A gifted pianist becomes trapped inside a twisting crime story after witnessing something he was never meant to see.', 1],
+        ['Dangal', 'drama', 2016, 8.3, '2h 41m', 'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1400&q=80', '', 'A determined father trains his daughters to become world-class wrestlers in a story about discipline and ambition.', 0],
+        ['Bhool Bhulaiyaa 2', 'comedy', 2022, 6.5, '2h 23m', 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1400&q=80', '', 'A fake spiritual healer is pulled into a haunted palace mystery where comedy and suspense collide.', 0],
+        ['Sholay', 'classic', 1975, 8.1, '3h 24m', 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=1400&q=80', '', 'Two outlaws are hired to protect a village, creating one of the most iconic friendships in Indian cinema.', 0]
     ];
+}
 
+function seedMovies(mysqli $conn, array $movies): void
+{
     foreach ($movies as $movie) {
         [$title, $slug, $year, $rating, $duration, $poster, $banner, $teaser, $description, $featured] = $movie;
         $categoryQuery = mysqli_prepare($conn, 'SELECT id FROM categories WHERE slug = ? LIMIT 1');
@@ -140,9 +137,22 @@ if ($movieCount === 0) {
     }
 }
 
+$movieCountResult = mysqli_query($conn, 'SELECT COUNT(*) AS total FROM movies');
+$movieCount = (int) mysqli_fetch_assoc($movieCountResult)['total'];
+$legacySeedCheck = mysqli_query($conn, "SELECT id FROM movies WHERE title IN ('Neon Eclipse', 'Velvet Pulse', 'Shadow Protocol', 'Crimson Run') LIMIT 1");
+$shouldRefreshSeeds = mysqli_num_rows($legacySeedCheck) > 0;
+
+if ($movieCount === 0 || $shouldRefreshSeeds) {
+    mysqli_query($conn, 'SET FOREIGN_KEY_CHECKS=0');
+    mysqli_query($conn, 'TRUNCATE TABLE wishlist');
+    mysqli_query($conn, 'TRUNCATE TABLE movies');
+    mysqli_query($conn, 'SET FOREIGN_KEY_CHECKS=1');
+    seedMovies($conn, bollyMovieSeeds());
+}
+
 function siteName(): string
 {
-    return 'CineVerse Recommender';
+    return 'Bolly Movies';
 }
 
 function currentUser(): ?array
@@ -193,5 +203,10 @@ function logActivity(mysqli $conn, string $actorName, string $actorRole, string 
     mysqli_stmt_bind_param($stmt, 'sss', $actorName, $actorRole, $actionText);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
+}
+
+function hasPlayableTeaser(array $movie): bool
+{
+    return trim((string) ($movie['teaser_url'] ?? '')) !== '';
 }
 ?>

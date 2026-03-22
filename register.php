@@ -24,14 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirectTo('register.php');
 }
 
-$pageTitle = 'Register New User';
+$pageTitle = 'Register Account';
 $heroImage = 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1600&q=80';
 include 'includes/header.php';
 ?>
 <section class="form-card scroll-animated">
     <p class="eyebrow">Create Account</p>
     <h2>Register</h2>
-    <p class="form-hint">Provide your name, username, password, and email to start building your personal movie wishlist.</p>
+    <p class="form-hint">Provide your name, username, password, and email to start building your Bolly Movies wishlist.</p>
     <form method="post">
         <div class="form-grid">
             <div class="form-group">

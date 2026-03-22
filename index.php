@@ -2,7 +2,7 @@
 require_once 'includes/data.php';
 $featuredMovies = getFeaturedMovies($conn, 4);
 $allMovies = getMovies($conn);
-$pageTitle = '3D Movie Recommendation Experience';
+$pageTitle = 'Bolly Movies';
 $heroImage = $featuredMovies[0]['banner_url'] ?? 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1600&q=80';
 include 'includes/header.php';
 ?>
@@ -10,8 +10,8 @@ include 'includes/header.php';
     <div class="section-heading">
         <div>
             <p class="eyebrow">Featured Collection</p>
-            <h2>Handpicked Movies For Every Mood</h2>
-            <p class="section-copy">Browse powerful recommendation cards with teaser previews, animated gradients, and category shortcuts for horror, thriller, romantic, sci-fi, fantasy, and action.</p>
+            <h2>Handpicked Bollywood Favorites</h2>
+            <p class="section-copy">The homepage now reads movies from MySQL so the catalog, details, and admin changes come from one database source.</p>
         </div>
         <button class="secondary-btn" data-scroll-right>Scroll Right Movies</button>
     </div>
@@ -33,19 +33,19 @@ include 'includes/header.php';
 
 <section class="feature-grid scroll-animated">
     <article class="feature-card">
-        <p class="eyebrow">Auto Setup</p>
-        <h3>Database & tables created in db.php</h3>
-        <p class="card-copy">Open the project in XAMPP, and the PHP layer automatically creates the database, user table, categories, movies, wishlist, and activity logs.</p>
+        <p class="eyebrow">MySQL Catalog</p>
+        <h3>Movie data comes from the database</h3>
+        <p class="card-copy">Movies, categories, wishlists, and activity logs are loaded from MySQL instead of a remote movie API.</p>
     </article>
     <article class="feature-card">
-        <p class="eyebrow">Smart Wishlist</p>
-        <h3>Login, save, and revisit favorites</h3>
-        <p class="card-copy">Users can register with name, username, password, and email, then save movies to a personalized wishlist page.</p>
+        <p class="eyebrow">User Access</p>
+        <h3>Simple login and registration flow</h3>
+        <p class="card-copy">The main login button now takes users directly to the login page where register and admin login actions are shown under the form.</p>
     </article>
     <article class="feature-card">
         <p class="eyebrow">Admin Control</p>
-        <h3>Dedicated panel for movie uploads</h3>
-        <p class="card-copy">Admin credentials are pre-seeded so you can login quickly and add new movies, review user activity, and monitor reports.</p>
+        <h3>Add and delete movies</h3>
+        <p class="card-copy">Admins can create new movie entries, remove old ones, and keep the teaser section aligned with the correct movie card.</p>
     </article>
 </section>
 
@@ -53,7 +53,7 @@ include 'includes/header.php';
     <div class="section-heading">
         <div>
             <p class="eyebrow">Trending Movies</p>
-            <h2>Card Layout With Hover Teasers</h2>
+            <h2>Database-Driven Movie Cards</h2>
         </div>
         <a href="movies.php" class="primary-btn">Open Full Catalog</a>
     </div>
@@ -75,8 +75,8 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <div class="movie-card__hover">
-                    <p class="mt-0"><strong>Hover preview</strong></p>
-                    <p class="card-copy mb-0">Watch the teaser or add this movie to your wishlist from the detail page.</p>
+                    <p class="mt-0"><strong>Movie Preview</strong></p>
+                    <p class="card-copy mb-0">Open the movie detail page to see the correct movie summary and teaser status.</p>
                 </div>
             </article>
         <?php endforeach; ?>

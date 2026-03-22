@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirectTo('admin/dashboard.php');
     }
 
-    flashMessage('Invalid admin credentials. Use adi@gmail.com / 123.', 'danger');
+    flashMessage('Invalid admin credentials. Please contact the owner for access.', 'danger');
     redirectTo('admin-login.php');
 }
 
@@ -29,17 +29,20 @@ include 'includes/header.php';
 <section class="form-card scroll-animated">
     <p class="eyebrow">Administrator Access</p>
     <h2>Admin Login</h2>
-    <p class="form-hint">Use the seeded admin account to manage movies and reports. Email: <strong>adi@gmail.com</strong> | Password: <strong>123</strong>.</p>
+    <p class="form-hint">Only authorized administrators should sign in here to add or delete movies from the MySQL catalog.</p>
     <form method="post">
         <div class="form-group">
             <label for="email">Admin Email</label>
-            <input type="email" name="email" id="email" value="adi@gmail.com" required>
+            <input type="email" name="email" id="email" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" value="123" required>
+            <input type="password" name="password" id="password" required>
         </div>
-        <button class="primary-btn" type="submit">Login as Admin</button>
+        <div class="button-row login-actions">
+            <button class="primary-btn" type="submit">Login as Admin</button>
+            <a href="login.php" class="secondary-btn">User Login</a>
+        </div>
     </form>
 </section>
 <?php include 'includes/footer.php'; ?>
