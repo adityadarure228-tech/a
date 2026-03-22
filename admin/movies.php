@@ -4,6 +4,29 @@ require_once '../includes/data.php';
 requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? 'add';
+
+    if ($action === 'delete') {
+        $movieId = (int) ($_POST['movie_id'] ?? 0);
+        if ($movieId > 0) {
+            $movie = getMovieById($conn, $movieId);
+            $stmt = mysqli_prepare($conn, 'DELETE FROM movies WHERE id = ?');
+            mysqli_stmt_bind_param($stmt, 'i', $movieId);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+
+            if ($movie) {
+                logActivity($conn, currentUser()['name'], 'admin', 'Deleted movie: ' . $movie['title']);
+            }
+
+            flashMessage('Movie deleted successfully.', 'warning');
+            redirectTo('movies.php');
+        }
+
+        flashMessage('Unable to delete the selected movie.', 'danger');
+        redirectTo('movies.php');
+    }
+
     $title = trim($_POST['title'] ?? '');
     $categoryId = (int) ($_POST['category_id'] ?? 0);
     $releaseYear = (int) ($_POST['release_year'] ?? date('Y'));
@@ -15,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = trim($_POST['description'] ?? '');
     $featured = isset($_POST['featured']) ? 1 : 0;
 
-    if ($title && $categoryId && $poster && $banner && $teaser && $description) {
+    if ($title && $categoryId && $poster && $banner && $description) {
         $stmt = mysqli_prepare($conn, 'INSERT INTO movies (title, category_id, release_year, rating, duration, poster_url, banner_url, teaser_url, description, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         mysqli_stmt_bind_param($stmt, 'siidsssssi', $title, $categoryId, $releaseYear, $rating, $duration, $poster, $banner, $teaser, $description, $featured);
         mysqli_stmt_execute($stmt);
@@ -25,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirectTo('movies.php');
     }
 
-    flashMessage('Please fill every movie field.', 'danger');
+    flashMessage('Please fill every required movie field.', 'danger');
     redirectTo('movies.php');
 }
 
@@ -42,6 +65,7 @@ include 'nav.php';
         <p class="eyebrow">Admin Form</p>
         <h2>Add Movie</h2>
         <form method="post">
+            <input type="hidden" name="action" value="add">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="title">Movie Title</label>
@@ -66,11 +90,11 @@ include 'nav.php';
                 </div>
                 <div class="form-group">
                     <label for="duration">Duration</label>
-                    <input type="text" name="duration" id="duration" value="1h 58m" required>
+                    <input type="text" name="duration" id="duration" value="2h 00m" required>
                 </div>
                 <div class="form-group">
-                    <label for="teaser_url">Teaser URL (YouTube embed)</label>
-                    <input type="url" name="teaser_url" id="teaser_url" required>
+                    <label for="teaser_url">Teaser URL (optional embed link)</label>
+                    <input type="url" name="teaser_url" id="teaser_url">
                 </div>
                 <div class="form-group">
                     <label for="poster_url">Poster Image URL</label>
@@ -92,10 +116,10 @@ include 'nav.php';
         </form>
     </div>
     <aside class="highlight-card glass-panel">
-        <p class="eyebrow">Admin Credentials</p>
-        <h2>Quick Login</h2>
-        <p class="section-copy">Email: <strong>adi@gmail.com</strong><br>Password: <strong>123</strong></p>
-        <p class="section-copy">All images and movie teasers can use online URLs, so the portal works without local image uploads.</p>
+        <p class="eyebrow">Catalog Control</p>
+        <h2>MySQL Movie Management</h2>
+        <p class="section-copy">All movie information displayed on the website is read from MySQL, and teaser links are optional so mismatched videos are not forced onto a movie card.</p>
+        <p class="section-copy">Use the list below to remove outdated entries from the catalog.</p>
     </aside>
 </section>
 
@@ -106,9 +130,9 @@ include 'nav.php';
             <h2>Existing Movies</h2>
         </div>
     </div>
-    <div class="movie-grid">
+    <div class="movie-grid admin-movie-grid">
         <?php foreach ($movies as $movie): ?>
-            <article class="movie-card">
+            <article class="movie-card movie-card--admin">
                 <div class="movie-card__poster" style="background-image:url('<?php echo escape($movie['poster_url']); ?>')"></div>
                 <div class="movie-card__gradient"></div>
                 <div class="movie-card__content">
@@ -118,6 +142,14 @@ include 'nav.php';
                     </div>
                     <h3><?php echo escape($movie['title']); ?></h3>
                     <p class="card-copy"><?php echo escape(substr($movie['description'], 0, 90)); ?>...</p>
+                    <div class="detail-actions admin-card-actions">
+                        <a class="secondary-btn" href="../movie-details.php?id=<?php echo (int) $movie['id']; ?>">Preview</a>
+                        <form method="post" class="inline-form" onsubmit="return confirm('Delete this movie?');">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="movie_id" value="<?php echo (int) $movie['id']; ?>">
+                            <button class="action-btn action-btn--danger" type="submit">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </article>
         <?php endforeach; ?>

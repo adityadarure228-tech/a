@@ -9,6 +9,7 @@ if (!$movie) {
 $relatedMovies = array_filter(getMovies($conn, $movie['category_slug']), fn($item) => (int) $item['id'] !== $movieId);
 $pageTitle = $movie['title'];
 $heroImage = $movie['banner_url'];
+$hasTeaser = hasPlayableTeaser($movie);
 include 'includes/header.php';
 ?>
 <section class="detail-layout scroll-animated">
@@ -26,7 +27,7 @@ include 'includes/header.php';
                 <h2><?php echo escape($movie['title']); ?></h2>
                 <p class="section-copy"><?php echo escape($movie['description']); ?></p>
                 <div class="detail-actions">
-                    <a class="primary-btn" href="teaser.php?id=<?php echo (int) $movie['id']; ?>">Watch Teaser</a>
+                    <a class="primary-btn" href="teaser.php?id=<?php echo (int) $movie['id']; ?>"><?php echo $hasTeaser ? 'Watch Teaser' : 'View Teaser Status'; ?></a>
                     <?php if (isLoggedIn() && !isAdmin()): ?>
                         <a class="secondary-btn" href="wishlist.php?add=<?php echo (int) $movie['id']; ?>">Add to Wishlist</a>
                     <?php else: ?>
@@ -51,6 +52,17 @@ include 'includes/header.php';
 </section>
 
 <section class="teaser-frame glass-panel scroll-animated">
-    <iframe src="<?php echo escape($movie['teaser_url']); ?>" title="<?php echo escape($movie['title']); ?> teaser" allowfullscreen></iframe>
+    <?php if ($hasTeaser): ?>
+        <iframe src="<?php echo escape($movie['teaser_url']); ?>" title="<?php echo escape($movie['title']); ?> teaser" allowfullscreen></iframe>
+    <?php else: ?>
+        <div class="teaser-placeholder">
+            <img src="<?php echo escape($movie['poster_url']); ?>" alt="<?php echo escape($movie['title']); ?> poster">
+            <div>
+                <p class="eyebrow">Teaser Update</p>
+                <h3><?php echo escape($movie['title']); ?></h3>
+                <p class="section-copy">A teaser has not been attached to this movie yet, which avoids showing a mismatched video under the wrong movie title.</p>
+            </div>
+        </div>
+    <?php endif; ?>
 </section>
 <?php include 'includes/footer.php'; ?>

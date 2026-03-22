@@ -13,12 +13,12 @@ include '../includes/header.php';
     <article class="metric-card">
         <p class="eyebrow">Profile</p>
         <strong><?php echo escape($user['name']); ?></strong>
-        <p class="stat-label">Username: <?php echo escape($user['username']); ?></p>
+        <p class="stat-label">Personal account overview.</p>
     </article>
     <article class="metric-card">
-        <p class="eyebrow">Email</p>
-        <strong><?php echo escape($user['email']); ?></strong>
-        <p class="stat-label">Role: <?php echo escape($user['role']); ?></p>
+        <p class="eyebrow">Role</p>
+        <strong><?php echo escape(ucfirst($user['role'])); ?></strong>
+        <p class="stat-label">Access level for this account.</p>
     </article>
     <article class="metric-card">
         <p class="eyebrow">Wishlist Count</p>

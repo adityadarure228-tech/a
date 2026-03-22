@@ -28,8 +28,8 @@ $basePath = $basePath ?? '';
                 <a href="<?php echo $basePath; ?>index.php" class="brand-mark">
                     <span class="brand-mark__orb"></span>
                     <span>
-                        <strong>CineVerse</strong>
-                        <small>Movie Recommendation System</small>
+                        <strong>Bolly Movies</strong>
+                        <small>MySQL Movie Library</small>
                     </span>
                 </a>
             </div>
@@ -42,17 +42,13 @@ $basePath = $basePath ?? '';
                 <?php endif; ?>
             </nav>
             <div class="header-actions">
-                <div class="dropdown">
-                    <button class="pill-btn pill-btn--ghost">Login</button>
-                    <div class="dropdown-menu glass-panel">
-                        <a href="<?php echo $basePath; ?>login.php">User Login</a>
-                        <a href="<?php echo $basePath; ?>register.php">Register</a>
-                        <a href="<?php echo $basePath; ?>admin-login.php">Admin Login</a>
-                    </div>
-                </div>
                 <?php if ($user): ?>
                     <span class="user-chip"><?php echo escape($user['name']); ?></span>
                     <a href="<?php echo $basePath; ?>logout.php" class="pill-btn">Logout</a>
+                <?php else: ?>
+                    <a href="<?php echo $basePath; ?>login.php" class="pill-btn">Login</a>
+                    <a href="<?php echo $basePath; ?>register.php" class="pill-btn pill-btn--ghost">Register</a>
+                    <a href="<?php echo $basePath; ?>admin-login.php" class="pill-btn pill-btn--ghost">Admin Login</a>
                 <?php endif; ?>
             </div>
         </header>
@@ -60,9 +56,9 @@ $basePath = $basePath ?? '';
         <section class="hero-banner" style="--hero-image:url('<?php echo escape($heroImage); ?>')">
             <div class="hero-banner__overlay"></div>
             <div class="hero-banner__content">
-                <p class="eyebrow">Unlimited Recommendations</p>
+                <p class="eyebrow">Bolly Movies</p>
                 <h1><?php echo escape($pageTitle); ?></h1>
-                <p class="hero-copy">Discover premium sci-fi, horror, thriller, romantic, fantasy, and action movies with cinematic visuals, teaser previews, and a modern admin-ready dashboard.</p>
+                <p class="hero-copy">Browse Bollywood-inspired titles from a MySQL database, manage the catalog from the admin area, and keep the movie pages, teasers, and labels aligned.</p>
                 <div class="category-pills">
                     <?php foreach ($categories as $category): ?>
                         <a href="<?php echo $basePath; ?>category.php?slug=<?php echo escape($category['slug']); ?>" class="category-pill" style="--accent:<?php echo escape($category['accent_color']); ?>">

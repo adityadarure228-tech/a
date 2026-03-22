@@ -1,12 +1,12 @@
         </main>
         <footer class="site-footer glass-panel">
             <div>
-                <h3>CineVerse Recommender</h3>
-                <p>Built with HTML, CSS, JavaScript, PHP, MySQL, and XAMPP-friendly setup.</p>
+                <h3>Bolly Movies</h3>
+                <p class="footer-copy">A Bollywood movie portal backed by MySQL with user wishlists and admin movie management.</p>
             </div>
             <div>
-                <p>Admin Login: <strong>adi@gmail.com</strong> / <strong>123</strong></p>
-                <p>Watch trailers, save wishlists, and manage movies from the admin panel.</p>
+                <p class="footer-copy"><strong>Owner:</strong> Adi Admin</p>
+                <p class="footer-copy"><strong>Email:</strong> adi@gmail.com</p>
             </div>
         </footer>
     </div>

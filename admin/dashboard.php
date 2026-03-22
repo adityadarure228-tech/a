@@ -14,7 +14,7 @@ include 'nav.php';
     <article class="metric-card">
         <p class="eyebrow">Total Movies</p>
         <strong><?php echo $stats['movies']; ?></strong>
-        <p class="stat-label">Movies available in all categories.</p>
+        <p class="stat-label">Movies available in the Bolly Movies catalog.</p>
     </article>
     <article class="metric-card">
         <p class="eyebrow">Registered Users</p>
@@ -29,7 +29,7 @@ include 'nav.php';
     <article class="metric-card">
         <p class="eyebrow">Active Categories</p>
         <strong><?php echo $stats['categories']; ?></strong>
-        <p class="stat-label">Buttons available in the website header.</p>
+        <p class="stat-label">Categories visible in the website header.</p>
     </article>
 </section>
 
@@ -42,12 +42,12 @@ include 'nav.php';
     </div>
     <div class="link-grid">
         <a class="quick-link feature-card" href="movies.php">
-            <h3>Add or review movies</h3>
-            <p class="card-copy">Open the movie management area to seed fresh recommendations.</p>
+            <h3>Add or delete movies</h3>
+            <p class="card-copy">Open the movie management area to update the MySQL-backed catalog.</p>
         </a>
         <a class="quick-link feature-card" href="../reports/users-report.php">
-            <h3>Inspect user records</h3>
-            <p class="card-copy">View names, usernames, emails, and registration timestamps.</p>
+            <h3>Inspect member summary</h3>
+            <p class="card-copy">Review basic member records without exposing unnecessary sensitive information.</p>
         </a>
         <a class="quick-link feature-card" href="../reports/activity-report.php">
             <h3>Audit recent actions</h3>

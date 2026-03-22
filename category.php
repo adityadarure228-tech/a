@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/data.php';
-$slug = $_GET['slug'] ?? 'sci-fi';
+$slug = $_GET['slug'] ?? 'action';
 $movies = getMovies($conn, $slug);
 $categories = getCategories($conn);
 $currentCategory = null;
@@ -19,7 +19,7 @@ include 'includes/header.php';
         <div>
             <p class="eyebrow">Category Focus</p>
             <h2><?php echo escape($pageTitle); ?></h2>
-            <p class="section-copy">This filtered page highlights category buttons and movie teasers for the selected genre.</p>
+            <p class="section-copy">This filtered page highlights database movies for the selected category.</p>
         </div>
         <a class="secondary-btn" href="movies.php">Back to Catalog</a>
     </div>

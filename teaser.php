@@ -8,11 +8,23 @@ if (!$movie) {
 }
 $pageTitle = 'Teaser: ' . $movie['title'];
 $heroImage = $movie['banner_url'];
+$hasTeaser = hasPlayableTeaser($movie);
 include 'includes/header.php';
 ?>
 <section class="report-layout scroll-animated">
     <div class="teaser-frame glass-panel">
-        <iframe src="<?php echo escape($movie['teaser_url']); ?>?autoplay=1&mute=1" title="<?php echo escape($movie['title']); ?> teaser clip" allowfullscreen></iframe>
+        <?php if ($hasTeaser): ?>
+            <iframe src="<?php echo escape($movie['teaser_url']); ?>?autoplay=1&amp;mute=1" title="<?php echo escape($movie['title']); ?> teaser clip" allowfullscreen></iframe>
+        <?php else: ?>
+            <div class="teaser-placeholder teaser-placeholder--full">
+                <img src="<?php echo escape($movie['banner_url']); ?>" alt="<?php echo escape($movie['title']); ?> banner">
+                <div>
+                    <p class="eyebrow">Teaser Pending</p>
+                    <h2><?php echo escape($movie['title']); ?></h2>
+                    <p class="section-copy">This movie currently has no teaser URL saved, so the page shows the correct movie information instead of a mismatched video.</p>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
     <aside class="highlight-card glass-panel">
         <p class="eyebrow">Now Playing</p>
